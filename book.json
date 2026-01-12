@@ -1,0 +1,55 @@
+{
+  "title": "Advanced Progress Bar System",
+  "description": "Complete documentation for the Advanced Progress Bar System for FiveM",
+  "author": "Overflow Development",
+  "language": "en",
+  "gitbook": ">=3.2.0",
+  "root": ".",
+  "structure": {
+    "readme": "README.md",
+    "summary": "SUMMARY.md"
+  },
+  "plugins": [
+    "code",
+    "github",
+    "search",
+    "prism",
+    "-highlight",
+    "copy-code-button",
+    "expandable-chapters",
+    "back-to-top-button",
+    "theme-comscore"
+  ],
+  "pluginsConfig": {
+    "github": {
+      "url": "https://github.com/overflow-dev/overflow_progressbar"
+    },
+    "theme-default": {
+      "showLevel": true
+    },
+    "prism": {
+      "css": [
+        "prismjs/themes/prism-tomorrow.css"
+      ]
+    }
+  },
+  "variables": {
+    "version": "1.0.0"
+  },
+  "links": {
+    "sidebar": {
+      "Website": "https://www.overflow-dev.id",
+      "Support": "mailto:support@overflow-dev.id"
+    }
+  },
+  "pdf": {
+    "fontSize": 12,
+    "paperSize": "a4",
+    "margin": {
+      "top": 56,
+      "bottom": 56,
+      "right": 62,
+      "left": 62
+    }
+  }
+}
