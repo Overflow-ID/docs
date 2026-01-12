@@ -24,29 +24,10 @@
 ### API Reference
 
 * [Exports](overflow-progressbar/api/exports.md)
-* [Data Structures](overflow-progressbar/api/data-structures.md)
-* [Animations](overflow-progressbar/api/animations.md)
-* [Props](overflow-progressbar/api/props.md)
-* [Particles](overflow-progressbar/api/particles.md)
-* [Control Disabling](overflow-progressbar/api/controls.md)
 
 ### Examples
 
 * [Basic Examples](overflow-progressbar/examples/basic.md)
-* [Crafting System](overflow-progressbar/examples/crafting.md)
-* [Resource Gathering](overflow-progressbar/examples/gathering.md)
-* [Vehicle System](overflow-progressbar/examples/vehicles.md)
-* [Medical System](overflow-progressbar/examples/medical.md)
-* [Criminal Activities](overflow-progressbar/examples/criminal.md)
-* [Job Systems](overflow-progressbar/examples/jobs.md)
-
-### Advanced Topics
-
-* [Queue System](overflow-progressbar/advanced/queue.md)
-* [Particle Effects](overflow-progressbar/advanced/particles.md)
-* [State Management](overflow-progressbar/advanced/state.md)
-* [Best Practices](overflow-progressbar/advanced/best-practices.md)
-* [Performance](overflow-progressbar/advanced/performance.md)
 
 ### Troubleshooting
 
@@ -54,10 +35,6 @@
 * [Error Codes](overflow-progressbar/troubleshooting/error-codes.md)
 * [FAQ](overflow-progressbar/troubleshooting/faq.md)
 
-### Resources
+## Overflow Report v1
 
-* [Bone IDs Reference](overflow-progressbar/resources/bone-ids.md)
-* [Animation List](overflow-progressbar/resources/animation-list.md)
-* [Particle Effects List](overflow-progressbar/resources/particle-effects.md)
-* [Prop Models](overflow-progressbar/resources/prop-models.md)
-* [Changelog](overflow-progressbar/resources/changelog.md)
+* [TBD]
