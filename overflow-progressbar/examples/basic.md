@@ -27,12 +27,11 @@ Comprehensive code examples for common use cases.
 -- Minimal example
 exports['overflow_progressbar']:Progress({
     duration = 5000,
-    label = "Loading..."
-}, function(cancelled)
-    if not cancelled then
+    label = "Loading...",
+    onFinish = function()
         print("Done!")
     end
-end)
+})
 ```
 
 ### With Cancel Option
@@ -42,14 +41,14 @@ exports['overflow_progressbar']:Progress({
     duration = 10000,
     label = "Processing...",
     canCancel = true,  -- Player can press X to cancel
-    icon = "fas fa-spinner"
-}, function(cancelled)
-    if cancelled then
-        TriggerEvent('notify', 'Cancelled by user')
-    else
+    icon = "fas fa-spinner",
+    onFinish = function()
         TriggerEvent('notify', 'Completed successfully')
+    end,
+    onCancel = function()
+        TriggerEvent('notify', 'Cancelled by user')
     end
-end)
+})
 ```
 
 ### With Animation
@@ -116,14 +115,13 @@ RegisterNetEvent('crafting:start', function(itemName, craftTime, recipe)
                 x = 0.0, y = 0.0, z = 0.0,
                 xR = 0.0, yR = 0.0, zR = 0.0
             },
+            onFinish = function()
+                TriggerServerEvent('crafting:complete', itemName, recipe)
+            end,
             onCancel = function()
                 TriggerEvent('notify', 'Crafting cancelled')
             end
-        }, function(cancelled)
-            if not cancelled then
-                TriggerServerEvent('crafting:complete', itemName, recipe)
-            end
-        end)
+        })
     end)
 end)
 ```
@@ -193,14 +191,12 @@ RegisterNetEvent('crafting:complexItem', function()
         },
         onFinish = function()
             TriggerServerEvent('crafting:giveComplexItem')
-        end
-    }, function(cancelled)
-        if not cancelled then
             TriggerEvent('notify', 'Item crafted successfully!')
-        else
+        end,
+        onCancel = function()
             TriggerEvent('notify', 'Crafting failed!')
         end
-    end)
+    })
 end)
 ```
 
@@ -251,17 +247,16 @@ RegisterNetEvent('mining:start', function(rockCoords)
                 scale = 1.5
             }
         },
-        onCancel = function()
-            ClearPedTasks(playerPed)
-        end
-    }, function(cancelled)
-        if not cancelled then
+        onFinish = function()
             -- Random ore amount
             local amount = math.random(1, 5)
             TriggerServerEvent('mining:giveOre', amount)
             TriggerEvent('notify', 'Mined ' .. amount .. ' ore')
+        end,
+        onCancel = function()
+            ClearPedTasks(playerPed)
         end
-    end)
+    })
 end)
 ```
 
@@ -290,14 +285,13 @@ RegisterNetEvent('woodcutting:chopTree', function(treeEntity)
             bone = 28422,
             x = 0.0, y = 0.0, z = 0.0,
             xR = 170.0, yR = 0.0, zR = -130.0
-        }
-    }, function(cancelled)
-        if not cancelled then
+        },
+        onFinish = function()
             -- Delete tree and give wood
             DeleteEntity(treeEntity)
             TriggerServerEvent('woodcutting:giveWood', math.random(3, 7))
         end
-    end)
+    })
 end)
 ```
 
@@ -320,9 +314,8 @@ RegisterNetEvent('fishing:cast', function()
         },
         animation = {
             scenario = "WORLD_HUMAN_STAND_FISHING"
-        }
-    }, function(cancelled)
-        if not cancelled then
+        },
+        onFinish = function()
             -- Random catch chance
             if math.random(100) <= 70 then
                 local fish = GetRandomFish()
@@ -332,7 +325,7 @@ RegisterNetEvent('fishing:cast', function()
                 TriggerEvent('notify', 'The fish got away...')
             end
         end
-    end)
+    })
 end)
 
 function GetRandomFish()
@@ -385,16 +378,15 @@ RegisterNetEvent('mechanic:repairVehicle', function(vehicle)
                 bone = 28422,
                 scale = 1.0
             }
-        }
-    }, function(cancelled)
-        if not cancelled then
+        },
+        onFinish = function()
             SetVehicleFixed(vehicle)
             SetVehicleDeformationFixed(vehicle)
             SetVehicleUndriveable(vehicle, false)
             SetVehicleEngineOn(vehicle, true, true, false)
             TriggerEvent('notify', 'Vehicle repaired!')
         end
-    end)
+    })
 end)
 ```
 
@@ -424,6 +416,19 @@ RegisterNetEvent('criminal:lockpickVehicle', function(vehicle)
             anim = "low_force_entry_ds",
             flag = 16
         },
+        onFinish = function()
+            if failChance < 80 then  -- 80% success rate
+                SetVehicleDoorsLocked(vehicle, 1)
+                SetVehicleDoorsLockedForAllPlayers(vehicle, false)
+                TriggerEvent('notify', 'Vehicle unlocked!')
+
+                -- Alert police
+                TriggerServerEvent('police:vehicleTheftAlert', GetEntityCoords(vehicle))
+            else
+                TriggerEvent('notify', 'Lockpick failed!')
+                TriggerServerEvent('inventory:removeItem', 'lockpick', 1)
+            end
+        end,
         onCancel = function()
             -- Chance to break lockpick on cancel
             if math.random(100) < 30 then
@@ -431,21 +436,7 @@ RegisterNetEvent('criminal:lockpickVehicle', function(vehicle)
                 TriggerEvent('notify', 'Lockpick broke!')
             end
         end
-    }, function(cancelled)
-        if not cancelled then
-            if failChance < 80 then  -- 80% success rate
-                SetVehicleDoorsLocked(vehicle, 1)
-                SetVehicleDoorsLockedForAllPlayers(vehicle, false)
-                TriggerEvent('notify', 'Vehicle unlocked!')
-                
-                -- Alert police
-                TriggerServerEvent('police:vehicleTheftAlert', GetEntityCoords(vehicle))
-            else
-                TriggerEvent('notify', 'Lockpick failed!')
-                TriggerServerEvent('inventory:removeItem', 'lockpick', 1)
-            end
-        end
-    end)
+    })
 end)
 ```
 
@@ -467,13 +458,12 @@ RegisterNetEvent('criminal:hotwireVehicle', function(vehicle)
             dict = "anim@amb@clubhouse@tutorial@bkr_tut_ig3@",
             anim = "machinic_loop_mechandplayer",
             flag = 49
-        }
-    }, function(cancelled)
-        if not cancelled then
+        },
+        onFinish = function()
             SetVehicleEngineOn(vehicle, true, false, true)
             TriggerEvent('notify', 'Vehicle hotwired!')
         end
-    end)
+    })
 end)
 ```
 
@@ -509,14 +499,13 @@ RegisterNetEvent('medical:useBandage', function()
             bone = 28422,
             x = 0.0, y = 0.0, z = 0.0,
             xR = 0.0, yR = 0.0, zR = 0.0
-        }
-    }, function(cancelled)
-        if not cancelled then
+        },
+        onFinish = function()
             SetEntityHealth(playerPed, math.min(200, currentHealth + 30))
             TriggerServerEvent('inventory:removeItem', 'bandage', 1)
             TriggerEvent('notify', 'Bandage applied (+30 HP)')
         end
-    end)
+    })
 end)
 ```
 
@@ -547,16 +536,17 @@ RegisterNetEvent('medical:performCPR', function(targetId)
             dict = "mini@cpr@char_a@cpr_str",
             anim = "cpr_pumpchest",
             flag = 49
-        }
-    }, function(cancelled)
-        if not cancelled then
+        },
+        onFinish = function()
             TriggerServerEvent('medical:revivePlayer', targetId)
             TriggerEvent('notify', 'Patient revived!')
-        else
+            ClearPedTasks(playerPed)
+        end,
+        onCancel = function()
             TriggerEvent('notify', 'CPR cancelled')
+            ClearPedTasks(playerPed)
         end
-        ClearPedTasks(playerPed)
-    end)
+    })
 end)
 ```
 
@@ -582,12 +572,7 @@ RegisterNetEvent('criminal:crackSafe', function(safeEntity)
             dict = "mini@safe_cracking",
             anim = "dial_turn_clock_normal"
         },
-        onCancel = function()
-            -- Trigger alarm on cancel
-            TriggerServerEvent('police:silentAlarm', GetEntityCoords(safeEntity))
-        end
-    }, function(cancelled)
-        if not cancelled then
+        onFinish = function()
             if math.random(100) <= 60 then  -- 60% success
                 TriggerServerEvent('criminal:safeCracked', safeEntity)
                 TriggerEvent('notify', 'Safe cracked!')
@@ -595,8 +580,12 @@ RegisterNetEvent('criminal:crackSafe', function(safeEntity)
                 TriggerEvent('notify', 'Failed to crack safe')
                 TriggerServerEvent('police:triggeredAlarm', GetEntityCoords(safeEntity))
             end
+        end,
+        onCancel = function()
+            -- Trigger alarm on cancel
+            TriggerServerEvent('police:silentAlarm', GetEntityCoords(safeEntity))
         end
-    end)
+    })
 end)
 ```
 
@@ -626,13 +615,12 @@ RegisterNetEvent('drugs:processCocaine', function(amount)
                 offset = { x = 0.0, y = 0.0, z = 0.5 },
                 scale = 1.0
             }
-        }
-    }, function(cancelled)
-        if not cancelled then
+        },
+        onFinish = function()
             TriggerServerEvent('drugs:giveProcessedCocaine', amount)
             TriggerEvent('notify', 'Processed ' .. amount .. ' cocaine')
         end
-    end)
+    })
 end)
 ```
 
@@ -665,13 +653,12 @@ RegisterNetEvent('job:collectGarbage', function(bagCoords)
             bone = 28422,
             x = 0.0, y = 0.0, z = -0.1,
             xR = 0.0, yR = 0.0, zR = 0.0
-        }
-    }, function(cancelled)
-        if not cancelled then
+        },
+        onFinish = function()
             TriggerServerEvent('job:garbageCollected')
             TriggerEvent('notify', 'Garbage collected! +$50')
         end
-    end)
+    })
 end)
 ```
 
@@ -698,12 +685,11 @@ RegisterNetEvent('job:deliverPackage', function(houseId)
             bone = 28422,
             x = 0.0, y = 0.0, z = 0.0,
             xR = 0.0, yR = 0.0, zR = 0.0
-        }
-    }, function(cancelled)
-        if not cancelled then
+        },
+        onFinish = function()
             TriggerServerEvent('job:packageDelivered', houseId)
         end
-    end)
+    })
 end)
 ```
 
@@ -727,12 +713,11 @@ RegisterNetEvent('shop:purchaseItem', function(itemData)
         },
         animation = {
             scenario = "WORLD_HUMAN_STAND_MOBILE"
-        }
-    }, function(cancelled)
-        if not cancelled then
+        },
+        onFinish = function()
             TriggerServerEvent('shop:completePurchase', itemData)
         end
-    end)
+    })
 end)
 ```
 
@@ -752,13 +737,12 @@ RegisterNetEvent('doors:unlock', function(doorId)
         animation = {
             dict = "anim@heists@keycard@",
             anim = "exit"
-        }
-    }, function(cancelled)
-        if not cancelled then
+        },
+        onFinish = function()
             TriggerServerEvent('doors:setLocked', doorId, false)
             TriggerEvent('notify', 'Door unlocked')
         end
-    end)
+    })
 end)
 ```
 
@@ -784,7 +768,10 @@ RegisterNetEvent('mining:dynamicOre', function(oreType)
         animation = {
             dict = "melee@large_wpn@streamed_core",
             anim = "ground_attack_on_spot"
-        }
+        },
+        onFinish = function()
+            TriggerServerEvent('mining:giveOre', oreType)
+        end
     })
 end)
 ```
@@ -803,13 +790,12 @@ RegisterNetEvent('crafting:skillBased', function(itemName)
             duration = finalTime,
             label = "Crafting " .. itemName .. "...",
             icon = "fas fa-hammer",
-            canCancel = true
-        }, function(cancelled)
-            if not cancelled then
+            canCancel = true,
+            onFinish = function()
                 -- Also increase skill
                 TriggerServerEvent('player:increaseSkill', 'crafting', 1)
             end
-        end)
+        })
     end)
 end)
 ```
@@ -826,12 +812,13 @@ RegisterNetEvent('action:interruptible', function()
         duration = 10000,
         label = "Doing something...",
         canCancel = true,
+        onFinish = function()
+            progressActive = false
+        end,
         onCancel = function()
             progressActive = false
         end
-    }, function(cancelled)
-        progressActive = false
-    end)
+    })
 end)
 
 -- Monitor for damage

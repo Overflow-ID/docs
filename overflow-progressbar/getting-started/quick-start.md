@@ -13,21 +13,21 @@ exports['overflow_progressbar']:Progress({
 })
 ```
 
-## With Callback
+## With Callbacks
 
 Handle completion or cancellation:
 
 ```lua
 exports['overflow_progressbar']:Progress({
     duration = 5000,
-    label = "Processing..."
-}, function(cancelled)
-    if cancelled then
-        print("User cancelled the progress")
-    else
+    label = "Processing...",
+    onFinish = function()
         print("Progress completed successfully!")
+    end,
+    onCancel = function()
+        print("User cancelled the progress")
     end
-end)
+})
 ```
 
 ## Cancellable Progress
@@ -38,12 +38,11 @@ Allow players to cancel with a keybind (default: X):
 exports['overflow_progressbar']:Progress({
     duration = 10000,
     label = "Hold X to cancel",
-    canCancel = true
-}, function(cancelled)
-    if cancelled then
+    canCancel = true,
+    onCancel = function()
         TriggerEvent('notify', 'Action cancelled')
     end
-end)
+})
 ```
 
 ## With Animation
@@ -134,19 +133,14 @@ RegisterNetEvent('crafting:startCrafting', function(itemName)
         -- Callbacks
         onFinish = function()
             print("Crafting finished!")
+            TriggerServerEvent('crafting:giveItem', itemName)
+            TriggerEvent('notify', 'Crafted ' .. itemName .. '!')
         end,
         onCancel = function()
             print("Crafting cancelled!")
-        end
-
-    }, function(cancelled)
-        if not cancelled then
-            TriggerServerEvent('crafting:giveItem', itemName)
-            TriggerEvent('notify', 'Crafted ' .. itemName .. '!')
-        else
             TriggerEvent('notify', 'Crafting cancelled')
         end
-    end)
+    })
 end)
 ```
 
@@ -163,14 +157,14 @@ RegisterCommand('testprogress', function()
         icon = "fas fa-spinner",
         animation = {
             scenario = "WORLD_HUMAN_CLIPBOARD"
-        }
-    }, function(cancelled)
-        if cancelled then
-            print("Test cancelled")
-        else
+        },
+        onFinish = function()
             print("Test completed!")
+        end,
+        onCancel = function()
+            print("Test cancelled")
         end
-    end)
+    })
 end)
 ```
 
@@ -190,12 +184,11 @@ Client-side:
 RegisterNetEvent('myScript:showProgress', function(itemName, duration)
     exports['overflow_progressbar']:Progress({
         duration = duration,
-        label = "Processing " .. itemName .. "..."
-    }, function(cancelled)
-        if not cancelled then
+        label = "Processing " .. itemName .. "...",
+        onFinish = function()
             TriggerServerEvent('myScript:completed', itemName)
         end
-    end)
+    })
 end)
 ```
 

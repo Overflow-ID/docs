@@ -144,15 +144,40 @@ exports['overflow_progressbar']:Progress(data, callback)
 }
 ```
 
-#### Callback Function
+#### Callback Functions
 
+The Progress function supports two callback approaches:
+
+**Approach 1: Using onFinish and onCancel (Recommended)**
 ```lua
-function(cancelled)
+exports['overflow_progressbar']:Progress({
+    duration = 5000,
+    label = "Processing...",
+    onFinish = function()
+        print("Completed!")
+    end,
+    onCancel = function()
+        print("Cancelled!")
+    end
+})
+```
+
+**Approach 2: Legacy callback parameter**
+```lua
+exports['overflow_progressbar']:Progress({
+    duration = 5000,
+    label = "Processing..."
+}, function(cancelled)
     -- cancelled: boolean
     --   true  = Progress was cancelled (by user or interrupt)
     --   false = Progress completed successfully
-end
+    if not cancelled then
+        print("Completed!")
+    end
+end)
 ```
+
+*Note: Using onFinish and onCancel is recommended as it provides clearer code structure.*
 
 #### Examples
 
@@ -160,12 +185,11 @@ end
 ```lua
 exports['overflow_progressbar']:Progress({
     duration = 5000,
-    label = "Processing..."
-}, function(cancelled)
-    if not cancelled then
+    label = "Processing...",
+    onFinish = function()
         print("Completed!")
     end
-end)
+})
 ```
 
 **With Animation:**

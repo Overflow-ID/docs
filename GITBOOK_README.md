@@ -203,7 +203,7 @@ Use relative links for internal navigation:
 
 ## License Notice
 
-All documentation is Copyright © 2024 Overflow Development (@Overflow_ID).
+All documentation is Copyright © 2026 Overflow Development (@Overflow_ID).
 
 Unauthorized copying or distribution is prohibited. See main [README.md](README.md) for full terms.
 

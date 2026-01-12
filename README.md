@@ -6,11 +6,11 @@
 
 Welcome to the official documentation for Overflow Development resources! This documentation covers all the scripts and systems created by **@Overflow_ID** for FiveM servers.
 
-## 👋 Greetings from the Developer
+## 👋 Greetings from the Developers
 
 Hello and thank you for choosing Overflow Development!
 
-I'm **@Overflow_ID**, and I've dedicated countless hours to creating high-quality, performant, and feature-rich resources for the FiveM community. Each script is crafted with attention to detail, focusing on:
+We're **@Overflow_ID**, a dedicated team of developers who have committed countless hours to creating high-quality, performant, and feature-rich resources for the FiveM community. Each script is crafted with attention to detail, focusing on:
 
 - 🎯 **Performance** - Optimized code with minimal resource usage
 - 🎨 **Modern Design** - Clean, intuitive user interfaces
@@ -18,7 +18,7 @@ I'm **@Overflow_ID**, and I've dedicated countless hours to creating high-qualit
 - 📚 **Documentation** - Comprehensive guides and examples
 - 🛠️ **Support** - Dedicated support for all our resources
 
-My goal is to provide you with professional-grade resources that enhance your server's gameplay experience while maintaining excellent performance.
+Our goal is to provide you with professional-grade resources that enhance your server's gameplay experience while maintaining excellent performance.
 
 ## 📦 Our Resources
 
@@ -70,7 +70,7 @@ If you want to use this resource on multiple servers, you need to purchase addit
 ### 🚨 Copyright Protection
 
 ```
-Copyright © 2024 Overflow Development (@Overflow_ID)
+Copyright © 2026 Overflow Development (@Overflow_ID)
 All Rights Reserved.
 
 Unauthorized copying, modification, distribution, or use
@@ -117,7 +117,7 @@ When you purchase an Overflow Development resource, you get:
 ### Official Channels
 
 - 🌐 **Website**: [https://www.overflow-dev.id](https://www.overflow-dev.id)
-- 💬 **Discord**: [Join our server](#)
+- 💬 **Discord**: [https://discord.gg/E8HNtBSZYB](https://discord.gg/E8HNtBSZYB)
 - 📧 **Email**: support@overflow-dev.id
 - 🐛 **Issues**: [GitHub Issues](#)
 
@@ -155,6 +155,7 @@ At Overflow Development, we believe in:
 3. **User Experience** - Intuitive interfaces and clear documentation
 4. **Fair Pricing** - Professional quality at reasonable prices
 5. **Long-term Support** - We stand behind our products
+6. **Community First** - We listen to feedback and continuously improve
 
 ## 🚀 What's Next?
 
@@ -190,8 +191,8 @@ If you enjoy our work, please consider:
 
 **Happy Developing!**
 
+*The Overflow Development Team*
 *@Overflow_ID*
-*Overflow Development*
 
 ---
 

@@ -123,7 +123,7 @@ After changing the keybind in `config.lua`:
 1. Save the file
 2. Restart the resource:
    ```
-   restart overflow_progressbar
+   ensure overflow_progressbar
    ```
 
 ## Notes

@@ -42,34 +42,46 @@ The main configuration object passed to `Progress()`:
 }
 ```
 
-## Callback Function
+## Callback Functions
 
-The callback function receives one parameter:
+Progress bars support two callback approaches:
+
+### Recommended: onFinish and onCancel
 
 ```lua
-function(cancelled)
-    -- cancelled: boolean
-    -- true  = Progress was cancelled
-    -- false = Progress completed successfully
-end
+exports['overflow_progressbar']:Progress({
+    duration = 5000,
+    label = "Processing...",
+    onFinish = function()
+        -- Handle success
+        TriggerEvent('notify', 'Done!')
+    end,
+    onCancel = function()
+        -- Handle cancellation
+        TriggerEvent('notify', 'Cancelled!')
+    end
+})
 ```
 
-Example usage:
+### Legacy: Single Callback Parameter
 
 ```lua
 exports['overflow_progressbar']:Progress({
     duration = 5000,
     label = "Processing..."
 }, function(cancelled)
+    -- cancelled: boolean
+    -- true  = Progress was cancelled
+    -- false = Progress completed successfully
     if cancelled then
-        -- Handle cancellation
         TriggerEvent('notify', 'Cancelled!')
     else
-        -- Handle success
         TriggerEvent('notify', 'Done!')
     end
 end)
 ```
+
+**Note:** Using `onFinish` and `onCancel` is recommended for clearer code structure.
 
 ## Interrupts
 

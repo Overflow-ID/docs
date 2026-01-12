@@ -3,58 +3,61 @@
 ## Introduction
 
 * [Welcome](README.md)
-* [Overflow ProgressBar](overflow-progressbar/README.md)
 
-## Getting Started
+## Overflow ProgressBar
 
-* [Installation](getting-started/installation.md)
-* [Quick Start](getting-started/quick-start.md)
-* [Basic Concepts](getting-started/basic-concepts.md)
+* [Introduction](overflow-progressbar/README.md)
 
-## Configuration
+### Getting Started
 
-* [Overview](configuration/overview.md)
-* [Prop Configuration](configuration/props.md)
-* [Keybinds](configuration/keybinds.md)
-* [Style Settings](configuration/style.md)
+* [Installation](overflow-progressbar/getting-started/installation.md)
+* [Quick Start](overflow-progressbar/getting-started/quick-start.md)
+* [Basic Concepts](overflow-progressbar/getting-started/basic-concepts.md)
 
-## API Reference
+### Configuration
 
-* [Exports](api/exports.md)
-* [Data Structures](api/data-structures.md)
-* [Animations](api/animations.md)
-* [Props](api/props.md)
-* [Particles](api/particles.md)
-* [Control Disabling](api/controls.md)
+* [Overview](overflow-progressbar/configuration/overview.md)
+* [Prop Configuration](overflow-progressbar/configuration/props.md)
+* [Keybinds](overflow-progressbar/configuration/keybinds.md)
+* [Style Settings](overflow-progressbar/configuration/style.md)
 
-## Examples
+### API Reference
 
-* [Basic Examples](examples/basic.md)
-* [Crafting System](examples/crafting.md)
-* [Resource Gathering](examples/gathering.md)
-* [Vehicle System](examples/vehicles.md)
-* [Medical System](examples/medical.md)
-* [Criminal Activities](examples/criminal.md)
-* [Job Systems](examples/jobs.md)
+* [Exports](overflow-progressbar/api/exports.md)
+* [Data Structures](overflow-progressbar/api/data-structures.md)
+* [Animations](overflow-progressbar/api/animations.md)
+* [Props](overflow-progressbar/api/props.md)
+* [Particles](overflow-progressbar/api/particles.md)
+* [Control Disabling](overflow-progressbar/api/controls.md)
 
-## Advanced Topics
+### Examples
 
-* [Queue System](advanced/queue.md)
-* [Particle Effects](advanced/particles.md)
-* [State Management](advanced/state.md)
-* [Best Practices](advanced/best-practices.md)
-* [Performance](advanced/performance.md)
+* [Basic Examples](overflow-progressbar/examples/basic.md)
+* [Crafting System](overflow-progressbar/examples/crafting.md)
+* [Resource Gathering](overflow-progressbar/examples/gathering.md)
+* [Vehicle System](overflow-progressbar/examples/vehicles.md)
+* [Medical System](overflow-progressbar/examples/medical.md)
+* [Criminal Activities](overflow-progressbar/examples/criminal.md)
+* [Job Systems](overflow-progressbar/examples/jobs.md)
 
-## Troubleshooting
+### Advanced Topics
 
-* [Common Issues](troubleshooting/common-issues.md)
-* [Error Codes](troubleshooting/error-codes.md)
-* [FAQ](troubleshooting/faq.md)
+* [Queue System](overflow-progressbar/advanced/queue.md)
+* [Particle Effects](overflow-progressbar/advanced/particles.md)
+* [State Management](overflow-progressbar/advanced/state.md)
+* [Best Practices](overflow-progressbar/advanced/best-practices.md)
+* [Performance](overflow-progressbar/advanced/performance.md)
 
-## Resources
+### Troubleshooting
 
-* [Bone IDs Reference](resources/bone-ids.md)
-* [Animation List](resources/animation-list.md)
-* [Particle Effects List](resources/particle-effects.md)
-* [Prop Models](resources/prop-models.md)
-* [Changelog](resources/changelog.md)
+* [Common Issues](overflow-progressbar/troubleshooting/common-issues.md)
+* [Error Codes](overflow-progressbar/troubleshooting/error-codes.md)
+* [FAQ](overflow-progressbar/troubleshooting/faq.md)
+
+### Resources
+
+* [Bone IDs Reference](overflow-progressbar/resources/bone-ids.md)
+* [Animation List](overflow-progressbar/resources/animation-list.md)
+* [Particle Effects List](overflow-progressbar/resources/particle-effects.md)
+* [Prop Models](overflow-progressbar/resources/prop-models.md)
+* [Changelog](overflow-progressbar/resources/changelog.md)
